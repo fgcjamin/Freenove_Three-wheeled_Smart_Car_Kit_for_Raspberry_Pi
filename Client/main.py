@@ -37,6 +37,8 @@ import math
 #import copy
 from CloseThreading import *
 
+from Gamepad_Thread import Gamepad_Thread
+
 class DemoClass(QMainWindow, Ui_MainWindow):
     tcp = TCPClient()
     default_Server_IP = "192.168.1.108"
@@ -72,7 +74,9 @@ class DemoClass(QMainWindow, Ui_MainWindow):
         self.wgt_Drawing = PaintArea(self)
         self.wgt_Drawing.setGeometry(10,10,400,300)
         self.wgt_Drawing.setVisible(False)
-		self.mutex = threading.Lock()
+        self.mutex = threading.Lock()  
+        self.t_Gamepad_Thread = Gamepad_Thread(self)
+        self.t_Gamepad_Thread.start()
         #self.t_Recv_Sonic_Thread = Recv_Sonic_Thread(self)
         #self.t_Scan_Sonic_Thread = Scan_Sonic_Thread(self)
         #self.t_Paint_Thread = Piant_Thread(self.wgt_Drawing)
