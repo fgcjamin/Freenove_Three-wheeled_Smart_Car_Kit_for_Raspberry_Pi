@@ -72,7 +72,7 @@ class DemoClass(QMainWindow, Ui_MainWindow):
         self.wgt_Drawing = PaintArea(self)
         self.wgt_Drawing.setGeometry(10,10,400,300)
         self.wgt_Drawing.setVisible(False)
-        self.mutex = threading.Lock()  
+		self.mutex = threading.Lock()
         #self.t_Recv_Sonic_Thread = Recv_Sonic_Thread(self)
         #self.t_Scan_Sonic_Thread = Scan_Sonic_Thread(self)
         #self.t_Paint_Thread = Piant_Thread(self.wgt_Drawing)
@@ -287,11 +287,11 @@ class DemoClass(QMainWindow, Ui_MainWindow):
             pass
         else :
             #print "You Pressed Key : ", event.key(), event.text() 
-            if event.key() == Qt.Key_W:
+            if event.key() == Qt.Key_Z:
                 self.setMoveSpeed(cmd.CMD_FORWARD,self.slider_Speed.value())
             elif event.key() == Qt.Key_S:
                 self.setMoveSpeed(cmd.CMD_BACKWARD,self.slider_Speed.value())
-            elif event.key() == Qt.Key_A:
+            elif event.key() == Qt.Key_Q:
                 self.tcp.sendData(cmd.CMD_TURN_LEFT + str(self.slider_Direction.value() + self.slider_FineServo1.value()))
             elif event.key() == Qt.Key_D:                  
                 self.tcp.sendData(cmd.CMD_TURN_RIGHT + str(self.slider_Direction.value() + self.slider_FineServo1.value()))  
@@ -303,9 +303,9 @@ class DemoClass(QMainWindow, Ui_MainWindow):
             pass
         else:
             #print "You Released Key : ", event.key()
-            if event.key() == Qt.Key_W or event.key() == Qt.Key_S :
+            if event.key() == Qt.Key_Z or event.key() == Qt.Key_S :
                 self.tcp.sendData(cmd.CMD_STOP)
-            elif event.key() == Qt.Key_A or event.key() == Qt.Key_D:
+            elif event.key() == Qt.Key_Q or event.key() == Qt.Key_D:
                 self.tcp.sendData(cmd.CMD_TURN_CENTER + str(90+self.slider_FineServo1.value()))
             elif event.key() == Qt.Key_V:
                 self.tcp.sendData(cmd.CMD_BUZZER_ALARM)
